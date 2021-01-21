@@ -1,0 +1,65 @@
+package com.selenium.assignment;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class two
+{	
+	WebDriver driver;
+	
+	public static void main(String[] args)
+	{
+		two assignment = new two();
+		assignment.Launch();
+		assignment.SignUp();
+	}
+	
+	public void Launch()
+	{
+		//Launching Chrome driver
+		System.setProperty("webdriver.gecko.driver", "//D:/geckodriver.exe");
+		driver = new FirefoxDriver();
+		
+		driver.manage().window().maximize();
+		
+		String fb = "http://facebook.com";
+		driver.navigate().to(fb);
+		
+		String CurrentUrl = driver.getCurrentUrl();
+		System.out.println(CurrentUrl);
+		String ExpectedUrl = "http://www.facebook.com";
+		if(CurrentUrl.equalsIgnoreCase(ExpectedUrl))
+			System.out.println("Pass");
+		else
+			System.out.println("Fail");
+	}
+	
+	public void SignUp()
+	{
+		driver.findElement(By.id("u_0_2")).sendKeys(Keys.ENTER);
+		//driver.findElement(By.xpath("//*[@value='First Name']"));
+		WebElement name = driver.findElement(By.id("u_1_b"));
+		name.sendKeys("Abc");
+		System.out.println("Pass");
+		//driver.findElement(By.id("u_1_b")).sendKeys("Abc");
+		
+		driver.findElement(By.name("lastname")).sendKeys("Xyz");
+		driver.findElement(By.name("reg_email__")).sendKeys("abc@xyz.com");
+		driver.findElement(By.name("reg_passwd__")).sendKeys("0987654321");
+		Select day = new Select(driver.findElement(By.id("day")));
+		day.selectByVisibleText("01");
+		Select month = new Select(driver.findElement(By.id("month")));
+		month.selectByVisibleText("Jan");
+		Select year = new Select(driver.findElement(By.id("year")));
+		year.selectByVisibleText("2021");
+		
+		driver.findElement(By.id("u_2_2")).click();
+		driver.findElement(By.id("u_i_s")).click();
+		driver.close();
+	}
+}
