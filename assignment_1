@@ -1,0 +1,64 @@
+package com.selenium.assignment;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class one
+{
+	FirefoxDriver driver;
+	
+	public void browser()
+	{
+		//Launching the Firefox browser
+		System.setProperty("webdriver.gecko.driver", "//D:/geckodriver.exe");
+		driver = new FirefoxDriver();
+		
+		//Maximizing the browser window
+		driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		
+		 //Entering the url
+		 driver.get("https://qatechhub.com");
+		 
+		 //Retrieving the title of the webpage
+		 String title = driver.getTitle();
+		 String ExpectedTitle = "QA Automation Tools Trainings and Tutorials | QA Tech Hub";
+		 
+		 //if else statements to check if the retrieved title matches the webpage title or not
+		if (title.equalsIgnoreCase(ExpectedTitle))
+			System.out.println("Pass");
+		else
+			System.out.println("Fail");
+	}
+	
+	public void navigations()
+	{
+		String fb= "https://facebook.com";
+		//entering a new url (facebook)
+		driver.navigate().to(fb);
+		
+		//To navigate back to the previous webpage
+		driver.navigate().back();
+		
+		//To retrieve current url
+		String CurrentUrl = driver.getCurrentUrl();
+		System.out.println(CurrentUrl);
+		
+		//To navigate to the next webpage
+		driver.navigate().forward();
+		
+		//Refreshing/reloading the current webpage
+		driver.navigate().refresh();
+		
+		//To close the browser
+		driver.close();
+	}
+	
+	public static void main(String[] args)
+	{
+		one assignment = new one();
+		assignment.browser();
+		assignment.navigations();
+	}
+}
